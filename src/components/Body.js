@@ -32,21 +32,26 @@ const Body = () => {
   };
 
   const userStatus = useUserStatus();
+
   if (userStatus === false)
     return (
-      <h1>Looks like you're offline.Please check your internet connection</h1>
+      <h1 className="text-center text-red-500 font-semibold mt-10">
+        Looks like you're offline. Please check your internet connection
+      </h1>
     );
 
   return allRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="filter">
-        {/* 🔍 Search Section */}
-        <div className="search">
+    <div className="px-6 py-6 bg-gray-50 min-h-screen">
+      {/* 🔍 Filters Section */}
+      <div className="flex flex-wrap items-center gap-4 mb-6">
+        {/* Search */}
+        <div className="flex items-center border rounded-lg overflow-hidden bg-white shadow-sm">
           <input
             type="text"
-            className="search-box"
+            className="px-4 py-2 outline-none w-64"
+            placeholder="Search restaurants..."
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -54,7 +59,7 @@ const Body = () => {
           />
 
           <button
-            className="search-btn"
+            className="bg-blue-600 text-white px-4 py-2 hover:bg-blue-700 transition"
             onClick={() => {
               const filtered = allRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase()),
@@ -66,9 +71,9 @@ const Body = () => {
           </button>
         </div>
 
-        {/* ⭐ Top Rated Filter */}
+        {/* Top Rated */}
         <button
-          className="filter-btn"
+          className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
           onClick={() => {
             const filtered = allRestaurants.filter(
               (res) => res.info.avgRating > 4.5,
@@ -76,12 +81,12 @@ const Body = () => {
             setFilteredRestaurants(filtered);
           }}
         >
-          Top Rated Restaurants
+          Top Rated
         </button>
 
-        {/* 🔄 Reset Button */}
+        {/* Reset */}
         <button
-          className="filter-btn"
+          className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition"
           onClick={() => {
             setFilteredRestaurants(allRestaurants);
             setSearchText("");
@@ -92,12 +97,16 @@ const Body = () => {
       </div>
 
       {/* 🍽️ Restaurant Cards */}
-      <div className="res-container">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {filteredRestaurants.length === 0 ? (
           <Shimmer />
         ) : (
           filteredRestaurants.map((res) => (
-            <Link key={res?.info?.id} to={`/restaurant/${res.info.id}`}>
+            <Link
+              key={res?.info?.id}
+              to={`/restaurant/${res.info.id}`}
+              className="transform hover:scale-105 transition duration-200"
+            >
               <RestaurantCard resData={res} />
             </Link>
           ))

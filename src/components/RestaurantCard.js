@@ -5,18 +5,34 @@ const RestaurantCard = ({ resData }) => {
     resData?.info || {};
 
   return (
-    <div className="res-card">
+    <div className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition duration-200 overflow-hidden">
+      {/* Image */}
       <img
-        className="res-logo"
+        className="w-full h-40 object-cover"
         alt="restaurant"
         src={`${CDN_URL}${cloudinaryImageId}`}
       />
 
-      <h3>{name}</h3>
-      <h4>{cuisines?.join(", ")}</h4>
-      <h4>{avgRating} ⭐</h4>
-      <h4>{costForTwo}</h4>
-      <h4>{sla?.slaString}</h4>
+      {/* Content */}
+      <div className="p-4">
+        {/* Name */}
+        <h3 className="font-semibold text-lg truncate">{name}</h3>
+
+        {/* Cuisines */}
+        <p className="text-sm text-gray-500 truncate">{cuisines?.join(", ")}</p>
+
+        {/* Info Row */}
+        <div className="flex justify-between items-center mt-3 text-sm">
+          <span className="bg-green-100 text-green-700 px-2 py-1 rounded-md font-medium">
+            ⭐ {avgRating}
+          </span>
+
+          <span className="text-gray-600">{costForTwo}</span>
+        </div>
+
+        {/* Delivery Time */}
+        <p className="text-sm text-gray-500 mt-2">{sla?.slaString}</p>
+      </div>
     </div>
   );
 };
