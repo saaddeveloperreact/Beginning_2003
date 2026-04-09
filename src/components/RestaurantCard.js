@@ -37,4 +37,17 @@ const RestaurantCard = ({ resData }) => {
   );
 };
 
+export const withOpenLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="bg-black text-white px-2 py-1 rounded-md font-medium p-2 m-2 wrap-anywhere">
+          Open
+        </label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
+};
+
 export default RestaurantCard;

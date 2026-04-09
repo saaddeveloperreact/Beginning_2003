@@ -1,6 +1,6 @@
 "use client";
 
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withOpenLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -10,6 +10,8 @@ const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
+
+  const RestaurantCardWithLabel = withOpenLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -30,6 +32,7 @@ const Body = () => {
     setAllRestaurants(restaurants || []);
     setFilteredRestaurants(restaurants || []);
   };
+  console.log(allRestaurants);
 
   const userStatus = useUserStatus();
 
@@ -107,7 +110,11 @@ const Body = () => {
               to={`/restaurant/${res.info.id}`}
               className="transform hover:scale-105 transition duration-200"
             >
-              <RestaurantCard resData={res} />
+              {res?.info?.isOpen ? (
+                <RestaurantCardWithLabel resData={res} />
+              ) : (
+                <RestaurantCard resData={res} />
+              )}
             </Link>
           ))
         )}
