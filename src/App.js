@@ -9,13 +9,17 @@ import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { lazy, Suspense } from "react";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 /* Layout */
 const AppLayout = () => {
   return (
     <div>
-      <Header />
-      <Outlet />
+      <provider store={appStore}>
+        <Header />
+        <Outlet />
+      </provider>
     </div>
   );
 };

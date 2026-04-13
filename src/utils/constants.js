@@ -5,4 +5,4 @@ export const LOGO_URL =
   "https://img.freepik.com/premium-vector/fast-free-food-delivery_1208773-925.jpg?semt=ais_rp_50_assets&w=740&q=80";
 
 export const MENU_API_URL =
-  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.305163&lng=76.65517489999999&restaurantId=336906";
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.305163&lng=76.65517489999999&restaurantId=69577&catalog_qa=undefined&submitAction=ENTER";
